@@ -14,15 +14,15 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Asrfly.Gui.GuiCategories {
-    public partial class AddCustomersForm : Form {
+    public partial class AddCategoryForm : Form {
         private readonly int Id;
-        private readonly CustomersUserControl categoryUserControl;
+        private readonly CategoryUserControl categoryUserControl;
         private Categories categories;
         private readonly IDataHelper<Categories> dataHelper;
         private readonly IDataHelper<SystemRecords> dataHelperSystemRecords;
         private readonly Gui.GuiLoading.LoadingForm loadingForm;
 
-        public AddCustomersForm(int Id, CustomersUserControl categoryUserControl) {
+        public AddCategoryForm(int Id, CategoryUserControl categoryUserControl) {
             InitializeComponent();
             dataHelper = (IDataHelper<Categories>)ConfigurationObjectManager.GetObject("Categories");
             dataHelperSystemRecords = (IDataHelper<SystemRecords>)ConfigurationObjectManager.GetObject("SystemRecords");

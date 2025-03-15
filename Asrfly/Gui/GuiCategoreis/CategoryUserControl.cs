@@ -13,16 +13,16 @@ using Asrfly.Code;
 using ClosedXML.Excel;
 
 namespace Asrfly.Gui.GuiCategories {
-    public partial class CustomersUserControl : UserControl {
+    public partial class CategoryUserControl : UserControl {
         private readonly IDataHelper<Categories> dataHelper;
         private readonly IDataHelper<SystemRecords> dataHelperSystemRecords;
-        private static CustomersUserControl _CategoryUserControl;
+        private static CategoryUserControl _CategoryUserControl;
         private int RowId;
         private readonly Gui.GuiLoading.LoadingForm loadingForm;
         private List<int> IdList = new List<int>();
         private string SearchItem;
 
-        public CustomersUserControl() {
+        public CategoryUserControl() {
             InitializeComponent();
             dataHelper = (IDataHelper<Categories>)ConfigurationObjectManager.GetObject("Categories");
             dataHelperSystemRecords = (IDataHelper<SystemRecords>)ConfigurationObjectManager.GetObject("SystemRecords");
@@ -33,7 +33,7 @@ namespace Asrfly.Gui.GuiCategories {
         #region Events
 
         private void buttonAdd_Click(object sender, EventArgs e) {
-            AddCustomersForm addCategoryForm = new AddCategoryForm(0, this);
+            AddCategoryForm addCategoryForm = new AddCategoryForm(0, this);
             addCategoryForm.Show();
         }
 
@@ -127,7 +127,7 @@ namespace Asrfly.Gui.GuiCategories {
 
         #region Methods
 
-        public static CustomersUserControl Instance() {
+        public static CategoryUserControl Instance() {
             return _CategoryUserControl ?? (new CategoryUserControl());
         }
 
@@ -163,7 +163,7 @@ namespace Asrfly.Gui.GuiCategories {
             if (dataGridView1.RowCount > 0) {
                 // Get Id
                 RowId = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
-                AddCustomersForm addCategoryForm = new AddCategoryForm(RowId, this);
+                AddCategoryForm addCategoryForm = new AddCategoryForm(RowId, this);
                 addCategoryForm.Show();
             } else {
                 MessageCollections.ShowEmptyDataMessage();

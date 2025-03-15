@@ -1,6 +1,6 @@
 ﻿namespace Asrfly.Gui.GuiCategories
 {
-    partial class CustomersUserControl
+    partial class CategoryUserControl
     {
         /// <summary> 
         /// Required designer variable.
