@@ -10,6 +10,7 @@ namespace Asrfly.Code {
         public static void AddDependencyValues() {
             ConfigurationObjectManager.Register("Categories", new CategoriesEntity());
             ConfigurationObjectManager.Register("SystemRecords", new SystemRecordsEntity());
+            ConfigurationObjectManager.Register("Customers", new CustomersEntity());
         }
     }
 }

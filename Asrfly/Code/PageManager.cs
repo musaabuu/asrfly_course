@@ -13,20 +13,28 @@ namespace Asrfly.Code {
         }
 
         public void LoadPage(UserControl PageUserControl) {
-            // Load Current Page
+            main.panelContainer.Controls.Clear();
 
-            var oldPage = main.panelContainer.Controls.OfType<UserControl>().FirstOrDefault();
-            if (oldPage != null) {
-                // Remove Current 
-
-                main.panelContainer.Controls.Remove(oldPage);
-                oldPage.Dispose();
-            }
-
-            // Load New Page
-
-            PageUserControl.Dock = DockStyle.Fill;
             main.panelContainer.Controls.Add(PageUserControl);
+            PageUserControl.Dock = DockStyle.Fill;
+            PageUserControl.BringToFront();
         }
+
+        //public void LoadPage(UserControl PageUserControl) {
+        //    // Load Current Page
+
+        //    var oldPage = main.panelContainer.Controls.OfType<UserControl>().FirstOrDefault();
+        //    if (oldPage != null) {
+        //        // Remove Current 
+
+        //        main.panelContainer.Controls.Remove(oldPage);
+        //        oldPage.Dispose();
+        //    }
+
+        //    // Load New Page
+
+        //    PageUserControl.Dock = DockStyle.Fill;
+        //    main.panelContainer.Controls.Add(PageUserControl);
+        //}
     }
 }

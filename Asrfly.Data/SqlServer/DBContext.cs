@@ -20,5 +20,6 @@ namespace Asrfly.Core.SqlServer {
         // Tables
         public DbSet<Categories> Categories { get; set; }
         public DbSet<SystemRecords> SystemRecords { get; set; }
+        public DbSet<Customers> Customers { get; set; }
     }
 }

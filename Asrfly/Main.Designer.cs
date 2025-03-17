@@ -26,8 +26,7 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             flowLayoutPanel2 = new FlowLayoutPanel();
             buttonHome = new Button();
             buttonCategories = new Button();
@@ -100,6 +99,7 @@
             buttonCustomers.TabIndex = 0;
             buttonCustomers.Text = "العملاء";
             buttonCustomers.UseVisualStyleBackColor = true;
+            buttonCustomers.Click += buttonCustomers_Click;
             // 
             // buttonSuppliers
             // 
