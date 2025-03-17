@@ -112,6 +112,7 @@
             buttonSuppliers.TabIndex = 0;
             buttonSuppliers.Text = "الموردين";
             buttonSuppliers.UseVisualStyleBackColor = true;
+            buttonSuppliers.Click += buttonSuppliers_Click;
             // 
             // buttonProjects
             // 
