@@ -1,5 +1,5 @@
-﻿namespace Asrfly.Gui.GuiSupliers {
-    partial class AddSupliersForm {
+﻿namespace Asrfly.Gui.GuiSuppliers {
+    partial class AddSuppliersForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -215,7 +215,7 @@
             label1.TabIndex = 0;
             label1.Text = "اسم المورد";
             // 
-            // AddSupliersForm
+            // AddSuppliersForm
             // 
             AutoScaleDimensions = new SizeF(11F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -227,7 +227,7 @@
             Margin = new Padding(4, 6, 4, 6);
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "AddSupliersForm";
+            Name = "AddSuppliersForm";
             RightToLeft = RightToLeft.Yes;
             RightToLeftLayout = true;
             ShowIcon = false;
@@ -235,7 +235,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "اضافة / تعديل مورد";
             TopMost = true;
-            Load += AddSupliersForm_Load;
+            Load += AddSuppliersForm_Load;
             panel1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

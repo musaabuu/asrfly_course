@@ -1,6 +1,6 @@
-﻿namespace Asrfly.Gui.GuiSupliers
+﻿namespace Asrfly.Gui.GuiProjects
 {
-    partial class SupliersUserControl
+    partial class ProjectsUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -37,6 +37,7 @@
             buttonDelete = new Button();
             buttonUpdate = new Button();
             buttonExport = new Button();
+            buttonOpen = new Button();
             panel1 = new Panel();
             textBoxSeach = new TextBox();
             buttonSeach = new Button();
@@ -56,6 +57,7 @@
             flowLayoutPanel1.Controls.Add(buttonDelete);
             flowLayoutPanel1.Controls.Add(buttonUpdate);
             flowLayoutPanel1.Controls.Add(buttonExport);
+            flowLayoutPanel1.Controls.Add(buttonOpen);
             flowLayoutPanel1.Controls.Add(panel1);
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(0, 0);
@@ -69,7 +71,7 @@
             // 
             buttonAdd.Image = Properties.Resources.Add;
             buttonAdd.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonAdd.Location = new Point(1112, 10);
+            buttonAdd.Location = new Point(1091, 10);
             buttonAdd.Margin = new Padding(5);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(135, 55);
@@ -82,7 +84,7 @@
             // 
             buttonEdit.Image = Properties.Resources.Edit;
             buttonEdit.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonEdit.Location = new Point(967, 10);
+            buttonEdit.Location = new Point(946, 10);
             buttonEdit.Margin = new Padding(5);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(135, 55);
@@ -95,7 +97,7 @@
             // 
             buttonDelete.Image = Properties.Resources.Delete;
             buttonDelete.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonDelete.Location = new Point(822, 10);
+            buttonDelete.Location = new Point(801, 10);
             buttonDelete.Margin = new Padding(5);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(135, 55);
@@ -108,7 +110,7 @@
             // 
             buttonUpdate.Image = Properties.Resources.Refresh;
             buttonUpdate.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonUpdate.Location = new Point(677, 10);
+            buttonUpdate.Location = new Point(656, 10);
             buttonUpdate.Margin = new Padding(5);
             buttonUpdate.Name = "buttonUpdate";
             buttonUpdate.Size = new Size(135, 55);
@@ -121,7 +123,7 @@
             // 
             buttonExport.Image = Properties.Resources.Export_CSV;
             buttonExport.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonExport.Location = new Point(532, 10);
+            buttonExport.Location = new Point(511, 10);
             buttonExport.Margin = new Padding(5);
             buttonExport.Name = "buttonExport";
             buttonExport.Size = new Size(135, 55);
@@ -130,14 +132,27 @@
             buttonExport.UseVisualStyleBackColor = true;
             buttonExport.Click += buttonExport_Click;
             // 
+            // buttonOpen
+            // 
+            buttonOpen.Image = Properties.Resources.External_Link;
+            buttonOpen.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonOpen.Location = new Point(366, 10);
+            buttonOpen.Margin = new Padding(5);
+            buttonOpen.Name = "buttonOpen";
+            buttonOpen.Size = new Size(135, 55);
+            buttonOpen.TabIndex = 4;
+            buttonOpen.Text = "تصفح";
+            buttonOpen.UseVisualStyleBackColor = true;
+            buttonOpen.Click += buttonOpen_Click;
+            // 
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(textBoxSeach);
             panel1.Controls.Add(buttonSeach);
-            panel1.Location = new Point(16, 8);
+            panel1.Location = new Point(735, 73);
             panel1.Name = "panel1";
-            panel1.Size = new Size(508, 55);
+            panel1.Size = new Size(493, 55);
             panel1.TabIndex = 2;
             // 
             // textBoxSeach
@@ -148,7 +163,7 @@
             textBoxSeach.Margin = new Padding(0);
             textBoxSeach.Multiline = true;
             textBoxSeach.Name = "textBoxSeach";
-            textBoxSeach.Size = new Size(403, 53);
+            textBoxSeach.Size = new Size(388, 53);
             textBoxSeach.TabIndex = 2;
             textBoxSeach.TextChanged += textBoxSeach_TextChanged;
             // 
@@ -193,7 +208,7 @@
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 81);
@@ -225,7 +240,7 @@
             comboBoxPage.Tag = "";
             comboBoxPage.SelectedIndexChanged += comboBoxPage_SelectedIndexChanged;
             // 
-            // SupliersUserControl
+            // ProjectsUserControl
             // 
             AutoScaleDimensions = new SizeF(11F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -235,7 +250,7 @@
             Controls.Add(flowLayoutPanel1);
             Font = new Font("Cairo", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 6, 4, 6);
-            Name = "SupliersUserControl";
+            Name = "ProjectsUserControl";
             RightToLeft = RightToLeft.Yes;
             Size = new Size(1262, 599);
             flowLayoutPanel1.ResumeLayout(false);
@@ -258,5 +273,6 @@
         private DataGridView dataGridView1;
         private Button buttonExport;
         private ComboBox comboBoxPage;
+        private Button buttonOpen;
     }
 }

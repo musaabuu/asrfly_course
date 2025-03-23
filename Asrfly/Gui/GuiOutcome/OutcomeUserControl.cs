@@ -12,19 +12,21 @@ using Asrfly.Core;
 using Asrfly.Code;
 using ClosedXML.Excel;
 
-namespace Asrfly.Gui.GuiSupliers {
-    public partial class SupliersUserControl : UserControl {
-        private readonly IDataHelper<Supliers> dataHelper;
+namespace Asrfly.Gui.GuiOutcome {
+    public partial class OutcomeUserControl : UserControl {
+        private readonly IDataHelper<Outcome> dataHelper;
         private readonly IDataHelper<SystemRecords> dataHelperSystemRecords;
-        private static SupliersUserControl _SupliersUserControl;
+        private static OutcomeUserControl _OutcomeUserControl;
         private int RowId;
         private readonly Gui.GuiLoading.LoadingForm loadingForm;
         private List<int> IdList = new List<int>();
         private string SearchItem;
+        private int ProjectId;
 
-        public SupliersUserControl() {
+        public OutcomeUserControl(int ProjectId) {
             InitializeComponent();
-            dataHelper = (IDataHelper<Supliers>)ConfigurationObjectManager.GetObject("Supliers");
+            this.ProjectId = ProjectId;
+            dataHelper = (IDataHelper<Outcome>)ConfigurationObjectManager.GetObject("Outcome");
             dataHelperSystemRecords = (IDataHelper<SystemRecords>)ConfigurationObjectManager.GetObject("SystemRecords");
             loadingForm = new GuiLoading.LoadingForm();
             LoadData();
@@ -33,8 +35,8 @@ namespace Asrfly.Gui.GuiSupliers {
         #region Events
 
         private void buttonAdd_Click(object sender, EventArgs e) {
-            AddSupliersForm addSupliersForm = new AddSupliersForm(0, this);
-            addSupliersForm.Show();
+            AddOutcomeForm addOutcomeForm = new AddOutcomeForm(0, ProjectId, this);
+            addOutcomeForm.Show();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e) {
@@ -56,7 +58,7 @@ namespace Asrfly.Gui.GuiSupliers {
                                 var systemReocrds = new SystemRecords {
                                     Title = "عملية حذف",
                                     UserName = Properties.Settings.Default.UserName,
-                                    Details = "تم حذف صنف بالرقم التعريفي " + IdList[i].ToString(),
+                                    Details = "تم حذف الصرف بالرقم التعريفي " + IdList[i].ToString(),
                                     AddedDate = DateTime.Now
                                 };
                                 await dataHelperSystemRecords.AddAsync(systemReocrds);
@@ -127,10 +129,6 @@ namespace Asrfly.Gui.GuiSupliers {
 
         #region Methods
 
-        public static SupliersUserControl Instance() {
-            return _SupliersUserControl ?? (new SupliersUserControl());
-        }
-
         public async void LoadData() {
             loadingForm.Show(); 
             var data = await dataHelper.GetAllDataAsync();
@@ -152,21 +150,29 @@ namespace Asrfly.Gui.GuiSupliers {
 
         private void SetColumnTitles() {
             dataGridView1.Columns[0].HeaderText = "المعرف";
-            dataGridView1.Columns[1].HeaderText = "الاسم";
-            dataGridView1.Columns[2].HeaderText = "رقم الهاتف";
-            dataGridView1.Columns[3].HeaderText = "العنوان";
-            dataGridView1.Columns[4].HeaderText = "البريد الالكتروني";
-            dataGridView1.Columns[5].HeaderText = "التفاصيل";
-            dataGridView1.Columns[6].HeaderText = "الرصيد";
-            dataGridView1.Columns[7].HeaderText = "تاريخ الاضافة";
+            dataGridView1.Columns[1].HeaderText = "الصنف";
+            dataGridView1.Columns[2].HeaderText = "المورد";
+            dataGridView1.Columns[3].HeaderText = "تاريخ الصرف";
+            dataGridView1.Columns[4].HeaderText = "رقم الوصل";
+            dataGridView1.Columns[5].HeaderText = "المبلغ";
+            dataGridView1.Columns[6].HeaderText = "التفاصيل";
+
+            // Hide
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
+            dataGridView1.Columns[10].Visible = false;
+            dataGridView1.Columns[11].Visible = false;
+            dataGridView1.Columns[12].Visible = false;
+
         }
 
         private void Edit() {
             if (dataGridView1.RowCount > 0) {
                 // Get Id
                 RowId = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
-                AddSupliersForm addSupliersForm = new AddSupliersForm(RowId, this);
-                addSupliersForm.Show();
+                AddOutcomeForm addOutcomeForm = new AddOutcomeForm(RowId, ProjectId, this);
+                addOutcomeForm.Show();
             } else {
                 MessageCollections.ShowEmptyDataMessage();
             }
@@ -195,20 +201,31 @@ namespace Asrfly.Gui.GuiSupliers {
         private DataTable SetDatatableColumn(DataTable dataTable) {
             dataTable.Columns["Id"].SetOrdinal(0);
             dataTable.Columns["Id"].ColumnName = "المعرف";
-            dataTable.Columns["Name"].SetOrdinal(1);
-            dataTable.Columns["Name"].ColumnName = "الاسم";
-            dataTable.Columns["PhoneNumber"].SetOrdinal(2);
-            dataTable.Columns["PhoneNumber"].ColumnName = "رقم الهاتف";
-            dataTable.Columns["Address"].SetOrdinal(3);
-            dataTable.Columns["Address"].ColumnName = "العنوان";
-            dataTable.Columns["Email"].SetOrdinal(4);
-            dataTable.Columns["Email"].ColumnName = "البريد الالكتروني";
-            dataTable.Columns["Details"].SetOrdinal(5);
+            dataTable.Columns["CategoryName"].SetOrdinal(1);
+            dataTable.Columns["CategoryName"].ColumnName = "الصنف";
+            dataTable.Columns["SupplierName"].SetOrdinal(2);
+            dataTable.Columns["SupplierName"].ColumnName = "المورد";
+            dataTable.Columns["OutcomeDate"].SetOrdinal(3);
+            dataTable.Columns["OutcomeDate"].ColumnName = "تاريخ الصرف";
+            dataTable.Columns["ReceiveNumber"].SetOrdinal(4);
+            dataTable.Columns["ReceiveNumber"].ColumnName = "رقم الوصل";
+            dataTable.Columns["Amount"].SetOrdinal(5);
+            dataTable.Columns["Amount"].ColumnName = "المبلغ";
+            dataTable.Columns["Details"].SetOrdinal(6);
             dataTable.Columns["Details"].ColumnName = "التفاصيل";
-            dataTable.Columns["Balance"].SetOrdinal(6);
-            dataTable.Columns["Balance"].ColumnName = "الرصيد";
-            dataTable.Columns["AddedDate"].SetOrdinal(7);
-            dataTable.Columns["AddedDate"].ColumnName = "تاريخ الاضافة";
+            dataTable.Columns["CategoryId"].SetOrdinal(7);
+            dataTable.Columns["CategoryId"].ColumnName = "CategoryId";
+            dataTable.Columns["SupplierId"].SetOrdinal(8);
+            dataTable.Columns["SupplierId"].ColumnName = "SupplierId";
+            dataTable.Columns["ProjectId"].SetOrdinal(9);
+            dataTable.Columns["ProjectId"].ColumnName = "ProjectId";
+
+            // Hide 
+            dataTable.Columns.Remove("CategoryId");
+            dataTable.Columns.Remove("ProjectId");
+            dataTable.Columns.Remove("SupplierId");
+            dataTable.AcceptChanges();
+
             return dataTable;
         }
 

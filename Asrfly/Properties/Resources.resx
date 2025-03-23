@@ -154,6 +154,9 @@
   <data name="Export_CSV" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Export CSV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="External_Link" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\External Link.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="FieldRequiredCaption" xml:space="preserve">
     <value>خطأ ادخال </value>
   </data>

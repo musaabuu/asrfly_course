@@ -2,6 +2,7 @@
 using Asrfly.Core;
 using Asrfly.Data;
 using DocumentFormat.OpenXml.Drawing.Spreadsheet;
+using DocumentFormat.OpenXml.ExtendedProperties;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System;
@@ -15,22 +16,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
-namespace Asrfly.Gui.GuiSupliers {
-    public partial class AddSupliersForm : Form {
+namespace Asrfly.Gui.GuiProjects {
+    public partial class AddProjectsForm : Form {
         private readonly int Id;
-        private readonly SupliersUserControl supliersUserControl;
-        private Supliers supliers;
-        private readonly IDataHelper<Supliers> dataHelper;
+        private readonly ProjectsUserControl projectsUserControl;
+        private Projects projects;
+        private readonly IDataHelper<Projects> dataHelper;
+        private readonly IDataHelper<Customers> dataHelperCustomers;
         private readonly IDataHelper<SystemRecords> dataHelperSystemRecords;
         private readonly Gui.GuiLoading.LoadingForm loadingForm;
 
-        public AddSupliersForm(int Id, SupliersUserControl supliersUserControl) {
+        public AddProjectsForm(int Id, ProjectsUserControl projectsUserControl) {
             InitializeComponent();
-            dataHelper = (IDataHelper<Supliers>)ConfigurationObjectManager.GetObject("Supliers");
+            dataHelper = (IDataHelper<Projects>)ConfigurationObjectManager.GetObject("Projects");
+            dataHelperCustomers = (IDataHelper<Customers>)ConfigurationObjectManager.GetObject("Customers");
             dataHelperSystemRecords = (IDataHelper<SystemRecords>)ConfigurationObjectManager.GetObject("SystemRecords");
             loadingForm = new GuiLoading.LoadingForm();
             this.Id = Id;
-            this.supliersUserControl = supliersUserControl;
+            this.projectsUserControl = projectsUserControl;
         }
 
         private async void buttonSaveAndClose_Click(object sender, EventArgs e) {
@@ -73,7 +76,7 @@ namespace Asrfly.Gui.GuiSupliers {
             ClearFields();
         }
 
-        private async void AddSupliersForm_Load(object sender, EventArgs e) {
+        private async void AddProjectsForm_Load(object sender, EventArgs e) {
             loadingForm.Show();
             SetFieldData();
             loadingForm.Hide();
@@ -103,28 +106,33 @@ namespace Asrfly.Gui.GuiSupliers {
         private async Task<bool> AddData() {
             // Set Data 
 
-            supliers = new Supliers {
+            projects = new Projects {
                 Name = textBoxName.Text,
+                Customer = comboBoxCustomer.Text,
+                Company = textBoxCompany.Text,
+                StartDate = dateTimePickerStartDate.Value,
+                FinishDate = dateTimePickerFinishDate.Value,
                 Address = textBoxAddress.Text,
-                PhoneNumber = textBoxPhoneNumber.Text,
-                Email = textBoxEmail.Text,
                 Details = richTextBoxDetails.Text,
+                Income = Convert.ToDouble(textBoxIncome.Text),
+                Outcome = Convert.ToDouble(textBoxOutcome.Text),
+                Revenue = Convert.ToDouble(textBoxRevenue.Text),
                 AddedDate = DateTime.Now,
             };
 
             // Submit Data
 
-            var results = await dataHelper.AddAsync(supliers);
+            var results = await dataHelper.AddAsync(projects);
             if (results == 1) {
                 // Save System Records
                 var systemReocrds = new SystemRecords {
-                    Title = "عملية اضافة مورد",
+                    Title = "عملية اضافة مشروع",
                     UserName = Properties.Settings.Default.UserName,
-                    Details = "تم اضافة مورد " + supliers.Name,
+                    Details = "تم اضافة مشروع " + projects.Name,
                     AddedDate = DateTime.Now
                 };
                 await dataHelperSystemRecords.AddAsync(systemReocrds);
-                supliersUserControl.LoadData();
+                projectsUserControl.LoadData();
                 return true;
             } else {
                 return false;
@@ -134,29 +142,34 @@ namespace Asrfly.Gui.GuiSupliers {
         private async Task<bool> EditData() {
             // Set Data 
 
-            supliers = new Supliers {
+            projects = new Projects {
                 Id = Id,
                 Name = textBoxName.Text,
+                Customer = comboBoxCustomer.Text,
+                Company = textBoxCompany.Text,
+                StartDate = dateTimePickerStartDate.Value,
+                FinishDate = dateTimePickerFinishDate.Value,
                 Address = textBoxAddress.Text,
-                PhoneNumber = textBoxPhoneNumber.Text,
-                Email = textBoxEmail.Text,
                 Details = richTextBoxDetails.Text,
+                Income = Convert.ToDouble(textBoxIncome.Text),
+                Outcome = Convert.ToDouble(textBoxOutcome.Text),
+                Revenue = Convert.ToDouble(textBoxRevenue.Text),
                 AddedDate = DateTime.Now,
             };
 
             // Submit Data
 
-            var results = await dataHelper.EditAsync(supliers);
+            var results = await dataHelper.EditAsync(projects);
             if (results == 1) {
                 // Save System Records
                 var systemReocrds = new SystemRecords {
-                    Title = "عملية تعديل مورد",
+                    Title = "عملية تعديل مشروع",
                     UserName = Properties.Settings.Default.UserName,
-                    Details = "تم تعديل المورد " + supliers.Name,
+                    Details = "تم تعديل المشروع " + projects.Name,
                     AddedDate = DateTime.Now
                 };
                 await dataHelperSystemRecords.AddAsync(systemReocrds);
-                supliersUserControl.LoadData();
+                projectsUserControl.LoadData();
                 return true;
             } else {
                 return false;
@@ -164,16 +177,30 @@ namespace Asrfly.Gui.GuiSupliers {
         }
 
         private async void SetFieldData() {
+            // Get List Of Customers
+            var listCustomers = await dataHelperCustomers.GetAllDataAsync();
+            comboBoxCustomer.DataSource = listCustomers.Select(x => x.Name).ToList();
+            // Auto Complete
+            AutoCompleteStringCollection autoCompleteStringCollection = new AutoCompleteStringCollection();
+            autoCompleteStringCollection.AddRange(listCustomers.Select(x => x.Name).ToArray());
+            comboBoxCustomer.AutoCompleteCustomSource = autoCompleteStringCollection;
+            //listCustomers.Clear();
             if (Id > 0) {
-                // Set Supliers
-                supliers = await dataHelper.FindAsync(Id);
-                if (supliers != null) {
-                    textBoxName.Text = supliers.Name;
-                    textBoxPhoneNumber.Text = supliers.PhoneNumber;
-                    textBoxAddress.Text = supliers.Address;
-                    textBoxEmail.Text = supliers.Email;
-                    textBoxBalance.Text = supliers.Balance.ToString();
-                    richTextBoxDetails.Text = supliers.Details;
+                // Set Projects
+                if (projects != null) {
+                    textBoxName.Text = projects.Name;
+                    textBoxAddress.Text = projects.Address;
+                    richTextBoxDetails.Text = projects.Details;
+                    textBoxName.Text = projects.Name;
+                    comboBoxCustomer.Text = projects.Customer;
+                    textBoxCompany.Text = projects.Company;
+                    textBoxAddress.Text = projects.Address;
+                    dateTimePickerStartDate.Value = projects.StartDate;
+                    dateTimePickerFinishDate.Value = projects.FinishDate;
+                    richTextBoxDetails.Text = projects.Details;
+                    textBoxIncome.Text = projects.Income.ToString();
+                    textBoxOutcome.Text = projects.Outcome.ToString();
+                    textBoxRevenue.Text = projects.Revenue.ToString();
                 } else {
                     MessageCollections.ShowErrorServer();
                 }
@@ -183,8 +210,10 @@ namespace Asrfly.Gui.GuiSupliers {
         private void ClearFields() {
             textBoxName.Text = null;
             textBoxAddress.Text = null;
-            textBoxPhoneNumber.Text = null;
-            textBoxEmail.Text = null;
+            textBoxCompany.Text = null;
+            comboBoxCustomer = null;
+            dateTimePickerStartDate.Value = DateTime.Now;
+            dateTimePickerFinishDate.Value = DateTime.Now;
             richTextBoxDetails.Text = null;
         }
 
