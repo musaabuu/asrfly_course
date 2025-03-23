@@ -7,21 +7,21 @@ using Asrfly.Core;
 using Asrfly.Core.SqlServer;
 
 namespace Asrfly.Data.SqlServer {
-    public class SupliersEntity : IDataHelper<Supliers> {
+    public class SuppliersEntity : IDataHelper<Suppliers> {
         private DBContext db;
-        private Supliers table;
+        private Suppliers table;
 
         // Constructor
-        public SupliersEntity() {
+        public SuppliersEntity() {
             db = new DBContext();
         }
 
         #region Methods
 
-        public int Add(Supliers table) {
+        public int Add(Suppliers table) {
             try {
                 if (db.Database.CanConnect()) {
-                    db.Supliers.Add(table);
+                    db.Suppliers.Add(table);
                     db.SaveChanges();
                     return 1;
                 } else {
@@ -32,10 +32,10 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public async Task<int> AddAsync(Supliers table) {
+        public async Task<int> AddAsync(Suppliers table) {
             try {
                 if (await db.Database.CanConnectAsync()) {
-                    await db.Supliers.AddAsync(table);
+                    await db.Suppliers.AddAsync(table);
                     await db.SaveChangesAsync();
                     return 1;
                 } else {
@@ -50,7 +50,7 @@ namespace Asrfly.Data.SqlServer {
             try {
                 if (db.Database.CanConnect()) {
                     table = Find(Id);
-                    db.Supliers.Remove(table);
+                    db.Suppliers.Remove(table);
                     db.SaveChanges();
                     return 1;
                 } else {
@@ -65,7 +65,7 @@ namespace Asrfly.Data.SqlServer {
             try {
                 if (await db.Database.CanConnectAsync()) {
                     table = await FindAsync(Id);
-                    await Task.Run(() => db.Supliers.Remove(table));
+                    await Task.Run(() => db.Suppliers.Remove(table));
                     await db.SaveChangesAsync();
                     return 1;
                 } else {
@@ -76,11 +76,11 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public int Edit(Supliers table) {
+        public int Edit(Suppliers table) {
             try {
                 if (db.Database.CanConnect()) {
                     db = new DBContext();
-                    db.Supliers.Update(table);
+                    db.Suppliers.Update(table);
                     db.SaveChanges();
                     return 1;
                 } else {
@@ -91,11 +91,11 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public async Task<int> EditAsync(Supliers table) {
+        public async Task<int> EditAsync(Suppliers table) {
             try {
                 if (await db.Database.CanConnectAsync()) {
                     db = new DBContext();
-                    await Task.Run(() => db.Supliers.Update(table));
+                    await Task.Run(() => db.Suppliers.Update(table));
                     await db.SaveChangesAsync();
                     return 1;
                 } else {
@@ -106,10 +106,10 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public Supliers Find(int Id) {
+        public Suppliers Find(int Id) {
             try {
                 if (db.Database.CanConnect()) {
-                    return db.Supliers.Where(x => x.Id == Id).First();
+                    return db.Suppliers.Where(x => x.Id == Id).First();
                 } else {
                     return null;
                 }
@@ -118,10 +118,10 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public async Task<Supliers> FindAsync(int Id) {
+        public async Task<Suppliers> FindAsync(int Id) {
             try {
                 if (await db.Database.CanConnectAsync()) {
-                    return await Task.Run(() => db.Supliers.Where(x => x.Id == Id).First());
+                    return await Task.Run(() => db.Suppliers.Where(x => x.Id == Id).First());
                 } else {
                     return null;
                 }
@@ -130,10 +130,10 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public List<Supliers> GetAllData() {
+        public List<Suppliers> GetAllData() {
             try {
                 if (db.Database.CanConnect()) {
-                    return db.Supliers.ToList();
+                    return db.Suppliers.ToList();
                 } else {
                     return null;
                 }
@@ -142,10 +142,10 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public async Task<List<Supliers>> GetAllDataAsync() {
+        public async Task<List<Suppliers>> GetAllDataAsync() {
             try {
                 if (await db.Database.CanConnectAsync()) {
-                    return await Task.Run(() => db.Supliers.ToList());
+                    return await Task.Run(() => db.Suppliers.ToList());
                 } else {
                     return null;
                 }
@@ -154,10 +154,10 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public List<Supliers> Search(string SearchItem) {
+        public List<Suppliers> Search(string SearchItem) {
             try {
                 if (db.Database.CanConnect()) {
-                    return db.Supliers.Where(
+                    return db.Suppliers.Where(
                         x => x.Id.ToString() == SearchItem
                         || x.Name.Contains(SearchItem)
                         || x.PhoneNumber.Contains(SearchItem)
@@ -173,10 +173,10 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public async Task<List<Supliers>> SearchAsync(string SearchItem) {
+        public async Task<List<Suppliers>> SearchAsync(string SearchItem) {
             try {
                 if (await db.Database.CanConnectAsync()) {
-                    return await Task.Run(() => db.Supliers.Where(
+                    return await Task.Run(() => db.Suppliers.Where(
                         x => x.Id.ToString() == SearchItem
                         || x.Name.Contains(SearchItem)
                         || x.PhoneNumber.Contains(SearchItem)

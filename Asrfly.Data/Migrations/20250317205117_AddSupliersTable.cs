@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Asrfly.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddSupliersTable : Migration
+    public partial class AddSuppliersTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Supliers",
+                name: "Suppliers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -27,7 +27,7 @@ namespace Asrfly.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Supliers", x => x.Id);
+                    table.PrimaryKey("PK_Suppliers", x => x.Id);
                 });
         }
 
@@ -35,7 +35,7 @@ namespace Asrfly.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Supliers");
+                name: "Suppliers");
         }
     }
 }

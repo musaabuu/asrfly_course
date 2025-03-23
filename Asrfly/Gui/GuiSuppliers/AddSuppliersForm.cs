@@ -15,22 +15,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
-namespace Asrfly.Gui.GuiSupliers {
-    public partial class AddSupliersForm : Form {
+namespace Asrfly.Gui.GuiSuppliers {
+    public partial class AddSuppliersForm : Form {
         private readonly int Id;
-        private readonly SupliersUserControl supliersUserControl;
-        private Supliers supliers;
-        private readonly IDataHelper<Supliers> dataHelper;
+        private readonly SuppliersUserControl suppliersUserControl;
+        private Suppliers suppliers;
+        private readonly IDataHelper<Suppliers> dataHelper;
         private readonly IDataHelper<SystemRecords> dataHelperSystemRecords;
         private readonly Gui.GuiLoading.LoadingForm loadingForm;
 
-        public AddSupliersForm(int Id, SupliersUserControl supliersUserControl) {
+        public AddSuppliersForm(int Id, SuppliersUserControl suppliersUserControl) {
             InitializeComponent();
-            dataHelper = (IDataHelper<Supliers>)ConfigurationObjectManager.GetObject("Supliers");
+            dataHelper = (IDataHelper<Suppliers>)ConfigurationObjectManager.GetObject("Suppliers");
             dataHelperSystemRecords = (IDataHelper<SystemRecords>)ConfigurationObjectManager.GetObject("SystemRecords");
             loadingForm = new GuiLoading.LoadingForm();
             this.Id = Id;
-            this.supliersUserControl = supliersUserControl;
+            this.suppliersUserControl = suppliersUserControl;
         }
 
         private async void buttonSaveAndClose_Click(object sender, EventArgs e) {
@@ -73,7 +73,7 @@ namespace Asrfly.Gui.GuiSupliers {
             ClearFields();
         }
 
-        private async void AddSupliersForm_Load(object sender, EventArgs e) {
+        private async void AddSuppliersForm_Load(object sender, EventArgs e) {
             loadingForm.Show();
             SetFieldData();
             loadingForm.Hide();
@@ -103,7 +103,7 @@ namespace Asrfly.Gui.GuiSupliers {
         private async Task<bool> AddData() {
             // Set Data 
 
-            supliers = new Supliers {
+            suppliers = new Suppliers {
                 Name = textBoxName.Text,
                 Address = textBoxAddress.Text,
                 PhoneNumber = textBoxPhoneNumber.Text,
@@ -114,17 +114,17 @@ namespace Asrfly.Gui.GuiSupliers {
 
             // Submit Data
 
-            var results = await dataHelper.AddAsync(supliers);
+            var results = await dataHelper.AddAsync(suppliers);
             if (results == 1) {
                 // Save System Records
                 var systemReocrds = new SystemRecords {
                     Title = "عملية اضافة مورد",
                     UserName = Properties.Settings.Default.UserName,
-                    Details = "تم اضافة مورد " + supliers.Name,
+                    Details = "تم اضافة مورد " + suppliers.Name,
                     AddedDate = DateTime.Now
                 };
                 await dataHelperSystemRecords.AddAsync(systemReocrds);
-                supliersUserControl.LoadData();
+                suppliersUserControl.LoadData();
                 return true;
             } else {
                 return false;
@@ -134,7 +134,7 @@ namespace Asrfly.Gui.GuiSupliers {
         private async Task<bool> EditData() {
             // Set Data 
 
-            supliers = new Supliers {
+            suppliers = new Suppliers {
                 Id = Id,
                 Name = textBoxName.Text,
                 Address = textBoxAddress.Text,
@@ -146,17 +146,17 @@ namespace Asrfly.Gui.GuiSupliers {
 
             // Submit Data
 
-            var results = await dataHelper.EditAsync(supliers);
+            var results = await dataHelper.EditAsync(suppliers);
             if (results == 1) {
                 // Save System Records
                 var systemReocrds = new SystemRecords {
                     Title = "عملية تعديل مورد",
                     UserName = Properties.Settings.Default.UserName,
-                    Details = "تم تعديل المورد " + supliers.Name,
+                    Details = "تم تعديل المورد " + suppliers.Name,
                     AddedDate = DateTime.Now
                 };
                 await dataHelperSystemRecords.AddAsync(systemReocrds);
-                supliersUserControl.LoadData();
+                suppliersUserControl.LoadData();
                 return true;
             } else {
                 return false;
@@ -165,15 +165,15 @@ namespace Asrfly.Gui.GuiSupliers {
 
         private async void SetFieldData() {
             if (Id > 0) {
-                // Set Supliers
-                supliers = await dataHelper.FindAsync(Id);
-                if (supliers != null) {
-                    textBoxName.Text = supliers.Name;
-                    textBoxPhoneNumber.Text = supliers.PhoneNumber;
-                    textBoxAddress.Text = supliers.Address;
-                    textBoxEmail.Text = supliers.Email;
-                    textBoxBalance.Text = supliers.Balance.ToString();
-                    richTextBoxDetails.Text = supliers.Details;
+                // Set Suppliers
+                suppliers = await dataHelper.FindAsync(Id);
+                if (suppliers != null) {
+                    textBoxName.Text = suppliers.Name;
+                    textBoxPhoneNumber.Text = suppliers.PhoneNumber;
+                    textBoxAddress.Text = suppliers.Address;
+                    textBoxEmail.Text = suppliers.Email;
+                    textBoxBalance.Text = suppliers.Balance.ToString();
+                    richTextBoxDetails.Text = suppliers.Details;
                 } else {
                     MessageCollections.ShowErrorServer();
                 }

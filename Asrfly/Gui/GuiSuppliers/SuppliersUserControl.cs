@@ -12,19 +12,19 @@ using Asrfly.Core;
 using Asrfly.Code;
 using ClosedXML.Excel;
 
-namespace Asrfly.Gui.GuiSupliers {
-    public partial class SupliersUserControl : UserControl {
-        private readonly IDataHelper<Supliers> dataHelper;
+namespace Asrfly.Gui.GuiSuppliers {
+    public partial class SuppliersUserControl : UserControl {
+        private readonly IDataHelper<Suppliers> dataHelper;
         private readonly IDataHelper<SystemRecords> dataHelperSystemRecords;
-        private static SupliersUserControl _SupliersUserControl;
+        private static SuppliersUserControl _SuppliersUserControl;
         private int RowId;
         private readonly Gui.GuiLoading.LoadingForm loadingForm;
         private List<int> IdList = new List<int>();
         private string SearchItem;
 
-        public SupliersUserControl() {
+        public SuppliersUserControl() {
             InitializeComponent();
-            dataHelper = (IDataHelper<Supliers>)ConfigurationObjectManager.GetObject("Supliers");
+            dataHelper = (IDataHelper<Suppliers>)ConfigurationObjectManager.GetObject("Suppliers");
             dataHelperSystemRecords = (IDataHelper<SystemRecords>)ConfigurationObjectManager.GetObject("SystemRecords");
             loadingForm = new GuiLoading.LoadingForm();
             LoadData();
@@ -33,8 +33,8 @@ namespace Asrfly.Gui.GuiSupliers {
         #region Events
 
         private void buttonAdd_Click(object sender, EventArgs e) {
-            AddSupliersForm addSupliersForm = new AddSupliersForm(0, this);
-            addSupliersForm.Show();
+            AddSuppliersForm addSuppliersForm = new AddSuppliersForm(0, this);
+            addSuppliersForm.Show();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e) {
@@ -127,8 +127,8 @@ namespace Asrfly.Gui.GuiSupliers {
 
         #region Methods
 
-        public static SupliersUserControl Instance() {
-            return _SupliersUserControl ?? (new SupliersUserControl());
+        public static SuppliersUserControl Instance() {
+            return _SuppliersUserControl ?? (new SuppliersUserControl());
         }
 
         public async void LoadData() {
@@ -165,8 +165,8 @@ namespace Asrfly.Gui.GuiSupliers {
             if (dataGridView1.RowCount > 0) {
                 // Get Id
                 RowId = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
-                AddSupliersForm addSupliersForm = new AddSupliersForm(RowId, this);
-                addSupliersForm.Show();
+                AddSuppliersForm addSuppliersForm = new AddSuppliersForm(RowId, this);
+                addSuppliersForm.Show();
             } else {
                 MessageCollections.ShowEmptyDataMessage();
             }

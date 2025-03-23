@@ -92,7 +92,7 @@ namespace Asrfly.Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Asrfly.Core.Supliers", b =>
+            modelBuilder.Entity("Asrfly.Core.Suppliers", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -128,7 +128,7 @@ namespace Asrfly.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Supliers");
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("Asrfly.Core.SystemRecords", b =>

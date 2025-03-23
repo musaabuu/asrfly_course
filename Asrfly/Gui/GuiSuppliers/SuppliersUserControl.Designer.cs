@@ -1,6 +1,6 @@
-﻿namespace Asrfly.Gui.GuiSupliers
+﻿namespace Asrfly.Gui.GuiSuppliers
 {
-    partial class SupliersUserControl
+    partial class SuppliersUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -225,7 +225,7 @@
             comboBoxPage.Tag = "";
             comboBoxPage.SelectedIndexChanged += comboBoxPage_SelectedIndexChanged;
             // 
-            // SupliersUserControl
+            // SuppliersUserControl
             // 
             AutoScaleDimensions = new SizeF(11F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -235,7 +235,7 @@
             Controls.Add(flowLayoutPanel1);
             Font = new Font("Cairo", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 6, 4, 6);
-            Name = "SupliersUserControl";
+            Name = "SuppliersUserControl";
             RightToLeft = RightToLeft.Yes;
             Size = new Size(1262, 599);
             flowLayoutPanel1.ResumeLayout(false);

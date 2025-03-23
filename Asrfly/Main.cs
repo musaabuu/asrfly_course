@@ -36,7 +36,7 @@ namespace Asrfly {
         }
 
         private void buttonSuppliers_Click(object sender, EventArgs e) {
-            pageManager.LoadPage(Gui.GuiSupliers.SupliersUserControl.Instance());
+            pageManager.LoadPage(Gui.GuiSuppliers.SuppliersUserControl.Instance());
         }
     }
 }
