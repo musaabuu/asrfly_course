@@ -17,37 +17,37 @@ namespace Asrfly.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OutcomeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReceiveNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiveNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Amount = table.Column<double>(type: "float", nullable: false),
-                    Details = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Details = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    CategoriesId = table.Column<int>(type: "int", nullable: false),
+                    CategoriesId = table.Column<int>(type: "int", nullable: true),
                     SupplierId = table.Column<int>(type: "int", nullable: false),
-                    SuppliersId = table.Column<int>(type: "int", nullable: false),
+                    SuppliersId = table.Column<int>(type: "int", nullable: true),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
-                    ProjectsId = table.Column<int>(type: "int", nullable: false)
+                    ProjectsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Outcome", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Outcome_Categories_CategoriesId",
-                        column: x => x.CategoryId,
+                        column: x => x.CategoriesId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Outcome_Projects_ProjectsId",
-                        column: x => x.ProjectId,
+                        column: x => x.ProjectsId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Outcome_Suppliers_SuppliersId",
-                        column: x => x.SupplierId,
+                        column: x => x.SuppliersId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);

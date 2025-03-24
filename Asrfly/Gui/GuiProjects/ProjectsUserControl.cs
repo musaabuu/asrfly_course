@@ -129,6 +129,8 @@ namespace Asrfly.Gui.GuiProjects {
                 RowId = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
                 ProjectsManagementForm addProjectForm = new ProjectsManagementForm(RowId);
                 addProjectForm.Show();
+            } else {
+                MessageCollections.ShowEmptyDataMessage();
             }
         }
 
@@ -264,7 +266,6 @@ namespace Asrfly.Gui.GuiProjects {
         }
 
         #endregion
-
 
     }
 }

@@ -184,8 +184,9 @@ namespace Asrfly.Gui.GuiProjects {
             AutoCompleteStringCollection autoCompleteStringCollection = new AutoCompleteStringCollection();
             autoCompleteStringCollection.AddRange(listCustomers.Select(x => x.Name).ToArray());
             comboBoxCustomer.AutoCompleteCustomSource = autoCompleteStringCollection;
-            //listCustomers.Clear();
+            listCustomers.Clear();
             if (Id > 0) {
+                var projects = await dataHelper.FindAsync(Id);
                 // Set Projects
                 if (projects != null) {
                     textBoxName.Text = projects.Name;

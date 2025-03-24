@@ -94,16 +94,16 @@ namespace Asrfly.Gui.GuiOutcome {
             // Add 
 
             if (Id == 0) {
-                var CategoryName = comboBoxCategory.SelectedItem.ToString();
-                var SupplierName = comboBoxSupplier.SelectedItem.ToString();
+                string CategoryName = comboBoxCategory.SelectedItem.ToString();
+                string SupplierName = comboBoxSupplier.SelectedItem.ToString();
                 await Task.Run(() => SetCategoryId(CategoryName));
                 await Task.Run(() => SetSupplierId(SupplierName));
                 return await AddData();
             }
             // Edit
             else {
-                var CategoryName = comboBoxCategory.SelectedItem.ToString();
-                var SupplierName = comboBoxSupplier.SelectedItem.ToString();
+                string CategoryName = comboBoxCategory.SelectedItem.ToString();
+                string SupplierName = comboBoxSupplier.SelectedItem.ToString();
                 await Task.Run(() => SetCategoryId(CategoryName));
                 await Task.Run(() => SetSupplierId(SupplierName));
                 return await EditData();

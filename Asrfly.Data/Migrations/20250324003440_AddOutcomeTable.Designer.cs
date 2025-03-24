@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Asrfly.Data.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20250323125441_AddOutcomeTable")]
+    [Migration("20250324003440_AddOutcomeTable")]
     partial class AddOutcomeTable
     {
         /// <inheritdoc />
@@ -133,15 +133,15 @@ namespace Asrfly.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SuppliersId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
                     b.Property<string>("SupplierName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SuppliersId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
