@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="SqlServerConString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Server=localhost\\SQLEXPRESS;Database=AsrflyDataBase;Trusted_Connection=True;TrustServerCertificate=True;</Value>
+      <Value Profile="(Default)">Server=localhost\SQLEXPRESS;Database=AsrflyDataBase;Trusted_Connection=True;TrustServerCertificate=True</Value>
     </Setting>
     <Setting Name="HideNotificationInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2000</Value>
@@ -12,7 +12,7 @@
       <Value Profile="(Default)">MOSSAAB</Value>
     </Setting>
     <Setting Name="DataGridViewRowNumber" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3</Value>
+      <Value Profile="(Default)">5</Value>
     </Setting>
   </Settings>
 </SettingsFile>

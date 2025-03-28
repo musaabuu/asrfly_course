@@ -16,6 +16,7 @@ namespace Asrfly.Data.SqlServer {
             db = new DBContext();
         }
 
+
         #region Methods
 
         public int Add(Outcome table) {
@@ -32,7 +33,7 @@ namespace Asrfly.Data.SqlServer {
             }
         }
 
-        public async Task<int> AddAsync(Outcome table) {
+        public async Task<int> AddAsync(Outcome table)  {
             try {
                 if (await db.Database.CanConnectAsync()) {
                     await db.Outcome.AddAsync(table);
@@ -41,7 +42,7 @@ namespace Asrfly.Data.SqlServer {
                 } else {
                     return 0;
                 }
-            } catch {
+            } catch (Exception e){
                 return 0;
             }
         }

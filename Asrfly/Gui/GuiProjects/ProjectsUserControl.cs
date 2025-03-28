@@ -145,7 +145,7 @@ namespace Asrfly.Gui.GuiProjects {
         public async void LoadData() {
             loadingForm.Show();
             var data = await dataHelper.GetAllDataAsync();
-            dataGridView1.DataSource = data.Take(Properties.Settings.Default.DataGridViewRowNumber).ToList();
+             dataGridView1.DataSource = data.Take(Properties.Settings.Default.DataGridViewRowNumber).ToList();
             // Add Number Of Page To ComboBox
             comboBoxPage.Items.Clear();
             double value = (Convert.ToDouble(data.Count) / Convert.ToDouble(Properties.Settings.Default.DataGridViewRowNumber));

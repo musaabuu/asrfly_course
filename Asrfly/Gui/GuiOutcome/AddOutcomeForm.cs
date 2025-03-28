@@ -94,16 +94,16 @@ namespace Asrfly.Gui.GuiOutcome {
             // Add 
 
             if (Id == 0) {
-                string CategoryName = comboBoxCategory.SelectedItem.ToString();
-                string SupplierName = comboBoxSupplier.SelectedItem.ToString();
+                var CategoryName = comboBoxCategory.SelectedItem.ToString();
+                var SupplierName = comboBoxSupplier.SelectedItem.ToString();
                 await Task.Run(() => SetCategoryId(CategoryName));
                 await Task.Run(() => SetSupplierId(SupplierName));
                 return await AddData();
             }
             // Edit
             else {
-                string CategoryName = comboBoxCategory.SelectedItem.ToString();
-                string SupplierName = comboBoxSupplier.SelectedItem.ToString();
+                var CategoryName = comboBoxCategory.SelectedItem.ToString();
+                var SupplierName = comboBoxSupplier.SelectedItem.ToString();
                 await Task.Run(() => SetCategoryId(CategoryName));
                 await Task.Run(() => SetSupplierId(SupplierName));
                 return await EditData();
@@ -111,9 +111,7 @@ namespace Asrfly.Gui.GuiOutcome {
         }
 
         private bool IsFieldEmpty() {
-            if (comboBoxCategory.SelectedItem == null
-            || comboBoxSupplier.SelectedItem == null
-            || textBoxAmount.Text == string.Empty) {
+            if (comboBoxCategory.SelectedItem == null || comboBoxSupplier.SelectedItem == null || textBoxAmount.Text == string.Empty){
                 return true;
             } else {
                 return false;
@@ -122,7 +120,6 @@ namespace Asrfly.Gui.GuiOutcome {
 
         private async Task<bool> AddData() {
             // Set Data 
-
             outcome = new Outcome {
                 CategoryName = comboBoxCategory.SelectedItem.ToString(),
                 SupplierName = comboBoxSupplier.SelectedItem.ToString(),
@@ -136,14 +133,13 @@ namespace Asrfly.Gui.GuiOutcome {
             };
 
             // Submit Data
-
             var results = await dataHelper.AddAsync(outcome);
             if (results == 1) {
                 // Save System Records
                 var systemReocrds = new SystemRecords {
-                    Title = "اضافة عملية صرف",
+                    Title = "اضافة عملية Outcome",
                     UserName = Properties.Settings.Default.UserName,
-                    Details = "تم اضافة عملية صرف " + outcome.CategoryName,
+                    Details = "تم اضافة عملية Outcome " + outcome.CategoryName,
                     AddedDate = DateTime.Now
                 };
                 await dataHelperSystemRecords.AddAsync(systemReocrds);
@@ -158,6 +154,7 @@ namespace Asrfly.Gui.GuiOutcome {
             // Set Data 
 
             outcome = new Outcome {
+                Id = Id,
                 CategoryName = comboBoxCategory.SelectedItem.ToString(),
                 SupplierName = comboBoxSupplier.SelectedItem.ToString(),
                 ReceiveNumber = textBoxReceiveNumber.Text,
@@ -209,6 +206,7 @@ namespace Asrfly.Gui.GuiOutcome {
 
             if (Id > 0) {
                 // Set Outcome
+                outcome = await dataHelper.FindAsync(Id);
                 if (outcome != null) {
                     comboBoxCategory.SelectedItem = outcome.CategoryName;
                     comboBoxSupplier.SelectedItem = outcome.SupplierName;

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Asrfly.Data.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20250324003440_AddOutcomeTable")]
+    [Migration("20250328195447_AddOutcomeTable")]
     partial class AddOutcomeTable
     {
         /// <inheritdoc />

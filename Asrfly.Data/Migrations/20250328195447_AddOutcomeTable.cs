@@ -35,19 +35,19 @@ namespace Asrfly.Data.Migrations
                     table.PrimaryKey("PK_Outcome", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Outcome_Categories_CategoriesId",
-                        column: x => x.CategoriesId,
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Outcome_Projects_ProjectsId",
-                        column: x => x.ProjectsId,
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Outcome_Suppliers_SuppliersId",
-                        column: x => x.SuppliersId,
+                        column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
