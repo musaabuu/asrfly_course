@@ -12,6 +12,8 @@ namespace Asrfly.Code {
             ConfigurationObjectManager.Register("SystemRecords", new SystemRecordsEntity());
             ConfigurationObjectManager.Register("Customers", new CustomersEntity());
             ConfigurationObjectManager.Register("Suppliers", new SuppliersEntity());
+            ConfigurationObjectManager.Register("Projects", new ProjectsEntity());
+            ConfigurationObjectManager.Register("Outcome", new OutcomeEntity());
         }
     }
 }

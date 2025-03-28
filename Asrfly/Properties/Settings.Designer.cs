@@ -25,8 +25,8 @@ namespace Asrfly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=localhost\\\\SQLEXPRESS;Database=AsrflyDataBase;Trusted_Connection=True;Trus" +
-            "tServerCertificate=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=localhost\\SQLEXPRESS;Database=AsrflyDataBase;Trusted_Connection=True;Trust" +
+            "ServerCertificate=True")]
         public string SqlServerConString {
             get {
                 return ((string)(this["SqlServerConString"]));
@@ -62,7 +62,7 @@ namespace Asrfly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int DataGridViewRowNumber {
             get {
                 return ((int)(this["DataGridViewRowNumber"]));

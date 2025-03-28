@@ -22,5 +22,7 @@ namespace Asrfly.Core.SqlServer {
         public DbSet<SystemRecords> SystemRecords { get; set; }
         public DbSet<Customers> Customers { get; set; }
         public DbSet<Suppliers> Suppliers { get; set; }
+        public DbSet<Projects> Projects { get; set; }
+        public DbSet<Outcome> Outcome { get; set; }
     }
 }

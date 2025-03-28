@@ -125,6 +125,7 @@
             buttonProjects.TabIndex = 0;
             buttonProjects.Text = "المشاريع";
             buttonProjects.UseVisualStyleBackColor = true;
+            buttonProjects.Click += buttonProjects_Click;
             // 
             // buttonUsers
             // 

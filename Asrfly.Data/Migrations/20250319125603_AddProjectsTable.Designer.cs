@@ -4,6 +4,7 @@ using Asrfly.Core.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Asrfly.Data.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20250319125603_AddProjectsTable")]
+    partial class AddProjectsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,65 +93,6 @@ namespace Asrfly.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("Asrfly.Core.Outcome", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OutcomeDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReceiveNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SupplierName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SuppliersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoriesId");
-
-                    b.HasIndex("ProjectsId");
-
-                    b.HasIndex("SuppliersId");
-
-                    b.ToTable("Outcome");
                 });
 
             modelBuilder.Entity("Asrfly.Core.Projects", b =>
@@ -267,48 +211,6 @@ namespace Asrfly.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SystemRecords");
-                });
-
-            modelBuilder.Entity("Asrfly.Core.Outcome", b =>
-                {
-                    b.HasOne("Asrfly.Core.Categories", "Categories")
-                        .WithMany("Outcome")
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Asrfly.Core.Projects", "Projects")
-                        .WithMany("outcome")
-                        .HasForeignKey("ProjectsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Asrfly.Core.Suppliers", "Suppliers")
-                        .WithMany("Outcome")
-                        .HasForeignKey("SuppliersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categories");
-
-                    b.Navigation("Projects");
-
-                    b.Navigation("Suppliers");
-                });
-
-            modelBuilder.Entity("Asrfly.Core.Categories", b =>
-                {
-                    b.Navigation("Outcome");
-                });
-
-            modelBuilder.Entity("Asrfly.Core.Projects", b =>
-                {
-                    b.Navigation("outcome");
-                });
-
-            modelBuilder.Entity("Asrfly.Core.Suppliers", b =>
-                {
-                    b.Navigation("Outcome");
                 });
 #pragma warning restore 612, 618
         }

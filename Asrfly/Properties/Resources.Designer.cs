@@ -177,6 +177,16 @@ namespace Asrfly.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap External_Link {
+            get {
+                object obj = ResourceManager.GetObject("External_Link", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطأ ادخال .
         /// </summary>
         internal static string FieldRequiredCaption {
