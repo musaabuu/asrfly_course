@@ -24,13 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             panel1 = new Panel();
+            label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             panelIncome = new Panel();
             panelOutcome = new Panel();
-            label4 = new Label();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -46,6 +46,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1062, 116);
             panel1.TabIndex = 0;
+            // 
+            // label4
+            // 
+            label4.Dock = DockStyle.Right;
+            label4.Location = new Point(2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(265, 116);
+            label4.TabIndex = 3;
+            label4.Text = "الارباح";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -109,16 +119,6 @@
             panelOutcome.Size = new Size(525, 551);
             panelOutcome.TabIndex = 1;
             // 
-            // label4
-            // 
-            label4.Dock = DockStyle.Right;
-            label4.Location = new Point(2, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(265, 116);
-            label4.TabIndex = 3;
-            label4.Text = "الارباح";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // ProjectsManagementForm
             // 
             AutoScaleDimensions = new SizeF(11F, 37F);
@@ -134,7 +134,7 @@
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ادارة المشروع";
-            TopMost = true;
+            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);

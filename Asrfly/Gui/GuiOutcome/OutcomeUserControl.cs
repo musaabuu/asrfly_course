@@ -11,6 +11,7 @@ using Asrfly.Data;
 using Asrfly.Core;
 using Asrfly.Code;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Presentation;
 
 namespace Asrfly.Gui.GuiOutcome {
     public partial class OutcomeUserControl : UserControl {
@@ -115,7 +116,7 @@ namespace Asrfly.Gui.GuiOutcome {
             var dataId = data.Select(x => x.Id).ToArray();
             int index = comboBoxPage.SelectedIndex;
             int indexOfRow = Properties.Settings.Default.DataGridViewRowNumber * index;
-            dataGridView1.DataSource = data.Where(x => x.Id >= dataId[indexOfRow]).Take(Properties.Settings.Default.DataGridViewRowNumber).ToList();
+            dataGridView1.DataSource = data.Where(x => x.Id >= dataId[indexOfRow] && x.ProjectId == ProjectId).Take(Properties.Settings.Default.DataGridViewRowNumber).ToList();
             if (dataGridView1.DataSource == null) {
                 MessageCollections.ShowErrorServer();
             } else {
@@ -132,7 +133,7 @@ namespace Asrfly.Gui.GuiOutcome {
         public async void LoadData() {
             loadingForm.Show(); 
             var data = await dataHelper.GetAllDataAsync();
-            dataGridView1.DataSource = data.Take(Properties.Settings.Default.DataGridViewRowNumber).ToList();
+            dataGridView1.DataSource = data.Where(x => x.ProjectId == ProjectId).Take(Properties.Settings.Default.DataGridViewRowNumber).ToList();
             // Add Number Of Page To ComboBox
             comboBoxPage.Items.Clear();
             double value = (Convert.ToDouble(data.Count) / Convert.ToDouble(Properties.Settings.Default.DataGridViewRowNumber));
@@ -189,12 +190,14 @@ namespace Asrfly.Gui.GuiOutcome {
         public async void Search() {
             loadingForm.Show();
             SearchItem = textBoxSeach.Text;
-            dataGridView1.DataSource = await dataHelper.SearchAsync(SearchItem);
+            var data = await dataHelper.SearchAsync(SearchItem);
+            dataGridView1.DataSource = data.Where(x => x.ProjectId == ProjectId).ToList();   
             if (dataGridView1.DataSource == null) {
                 MessageCollections.ShowErrorServer();
             } else {
                 SetColumnTitles();
             }
+            data.Clear();
             loadingForm.Hide();
         }
 
